@@ -1,0 +1,16 @@
+.container
+  .row.mt-5
+    .col-md-12.my-4
+      .list
+        %h4 Estados
+      %table.table
+        %thead
+          %tr
+            %th Nombre
+            %th Código
+        %tbody
+          - @states.each do |state|
+            %tr
+              %td= state.name
+              %td= state.code
+    = render "back"

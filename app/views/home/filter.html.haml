@@ -1,0 +1,16 @@
+.container
+  .row.mt-5
+    .col-md-12.my-4
+      .list
+        %h4 Estados que empiezan con "AA"
+      %table.table
+        %thead
+          %tr
+            %th Name
+            %th Code
+        %tbody
+          - @filtered.each do |item|
+            %tr
+              %td= item.name
+              %td= item.code
+    = render "back"

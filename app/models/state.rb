@@ -1,6 +1,11 @@
 class State < ApplicationRecord
-  validates_presence_of :name, :code
-  validates :code, code_format: true
-
   has_many :cities
+
+  validates :name, presence: true
+  validates :code, presence: true
+  validates :code, place_code: true
+
+  def has_m?
+    self.code.match?("m")
+  end
 end

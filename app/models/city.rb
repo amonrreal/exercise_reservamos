@@ -1,7 +1,11 @@
 class City < ApplicationRecord
-  CODE_FORMAT = /\A[[:alpha:]]{2}+_[\d]{2}\z/
-  validates_presence_of :name, :code
-  validates_format_of :code, with: CODE_FORMAT
-
   belongs_to :state
+
+  validates :name, presence: true
+  validates :code, presence: true
+  validates :code, place_code: true
+
+  def has_m?
+    self.code.match?("m")
+  end
 end

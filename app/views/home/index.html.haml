@@ -1,10 +1,24 @@
 .container
-  .row 
+  .row.mt-5
     .col-md-12
-      Listado uno
-    .col-md-12 
-      Listado dos
-    .col-md-12
-      Listado tres
-    .col-md-12 
-      Formulario
+      = link_to "Estados", states_path, class: "btn btn-primary"
+      = link_to "Ciudades", cities_path, class: "btn btn-primary"
+      = link_to "Estados que empiezan con AA", filter_path, class: "btn btn-primary"
+    .col-md-6.mt-5
+      %hr
+      %h4 Formulario
+      = form_for @form, url: create_form_path(@form) do |f|
+        - if @form.errors.any?
+          #error_explanation
+            %p Ocurrio un error al enviar el formulario:   
+            %ul
+              - @form.errors.full_messages.each do |message|
+                %li= message
+        .form-group.my-3
+          = f.label "Nombre"
+          = f.text_field :name, class: "form-control"
+        .form-group.my-3
+          = f.label "Email"
+          = f.email_field :email, class: "form-control", required: false
+        .action
+          = f.submit "Enviar", class: "btn btn-info"
