@@ -1,4 +1,4 @@
-class Form
+class FormUser
   include ActiveModel::Model
   attr_accessor :name, :email
 

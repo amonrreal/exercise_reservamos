@@ -6,7 +6,7 @@ class EmailValidator < ActiveModel::EachValidator
       record.errors.add(
         attribute,
         :blank, 
-        message: "Formato de correo invalido"
+        message: "Invalid"
       )
     end
   end

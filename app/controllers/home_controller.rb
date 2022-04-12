@@ -1,14 +1,14 @@
 class HomeController < ApplicationController
   def index
-    @form = Form.new
+    @form_user = FormUser.new
   end
 
   def create_form
-    @form = Form.new(
-      name: params[:form][:name],
-      email: params[:form][:email]
+    @form_user = FormUser.new(
+      name: params[:form_user][:name],
+      email: params[:form_user][:email]
     )
-    if @form.valid?
+    if @form_user.valid?
       redirect_to success_path
     else 
       render :index
@@ -20,29 +20,15 @@ class HomeController < ApplicationController
   end
 
   def cities
-    @cities = City.all.includes(:state).order(updated_at: :desc)
+    @cities = City.recently.includes(:state)
   end
 
   def filter
-    @states = State.recently
-    @filtered = filtered
+    @filtered = State.recently
+                      .joins(:cities)
+                      .where("cities.code LIKE ?", "%AA%").distinct
   end
 
   def success
-  end
-
-  private
-
-  def filtered
-    items = []
-    @states.each do |state|
-      # revisar com poder hacer esto mas corto, optimizar
-      state.cities.each do |city|
-        if city.code.match?("AA")
-          items << city
-        end
-      end
-    end
-    items
   end
 end

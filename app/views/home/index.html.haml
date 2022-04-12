@@ -3,16 +3,16 @@
     .col-md-12
       = link_to "Estados", states_path, class: "btn btn-primary"
       = link_to "Ciudades", cities_path, class: "btn btn-primary"
-      = link_to "Estados que empiezan con AA", filter_path, class: "btn btn-primary"
+      = link_to "Estados filtrados", filter_path, class: "btn btn-primary"
     .col-md-6.mt-5
       %hr
       %h4 Formulario
-      = form_for @form, url: create_form_path(@form) do |f|
-        - if @form.errors.any?
+      = form_for @form_user, url: create_form_path(@form_user) do |f|
+        - if @form_user.errors.any?
           #error_explanation
             %p Ocurrio un error al enviar el formulario:   
             %ul
-              - @form.errors.full_messages.each do |message|
+              - @form_user.errors.full_messages.each do |message|
                 %li= message
         .form-group.my-3
           = f.label "Nombre"
